@@ -1,0 +1,481 @@
+/* ===== GLOBAL ===== */
+
+body {
+  margin: 0;
+  background: radial-gradient(
+      circle at 50% 35%,
+      rgba(194, 166, 90, 0.12),
+      transparent 45%
+    ),
+    #05060d;
+
+  color: #eaeaea;
+  font-family: 'Playfair Display', serif;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle,
+    transparent 55%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  pointer-events: none;
+}
+
+/* ===== ROOT CENTERING ===== */
+
+#root {
+  min-height: 100vh;
+}
+
+.scene-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
+}
+
+/* ===== OPENING SCENE ===== */
+
+.opening,
+.next-scene {
+  position: absolute;
+  text-align: center;
+  transition: opacity 2s ease;
+}
+
+.subtitle {
+  font-size: 13px;
+  letter-spacing: 4px;
+  opacity: 0;
+  margin-bottom: 30px;
+  animation: fadeUp 2s ease forwards;
+  animation-delay: 1s;
+}
+
+.title {
+  font-size: 70px;
+  color: #C2A65A;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin: 0;
+  opacity: 0;
+  animation: fadeUp 2.5s ease forwards;
+  animation-delay: 3s;
+}
+
+.name {
+  font-size: 30px;
+  font-weight: 300;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeUp 2.5s ease forwards;
+  animation-delay: 5.5s;
+}
+
+/* ===== SECOND SCENE ===== */
+
+.next-scene .content {
+  max-width: 750px;
+  padding: 0 20px;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 35px;
+}
+
+.section-title {
+  font-size: 78px;
+  line-height: 1.05;
+  margin-bottom: 50px;
+  color: #C2A65A;
+  font-weight: 400;
+  transition: 0.6s ease;
+}
+
+.next-scene.fade-in .section-title {
+  letter-spacing: 1px;
+}
+
+.section-text {
+  font-size: 20px;
+  line-height: 2.2;
+  opacity: 0.75;
+}
+
+/* ===== TRANSITIONS ===== */
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInScene 2.5s ease forwards;
+}
+
+@keyframes fadeInScene {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== CONTINUE TEXT ===== */
+
+.continue-text {
+  margin-top: 60px;
+  font-size: 12px;
+  letter-spacing: 4px;
+  opacity: 0;
+  animation: fadeUp 2s ease forwards;
+  animation-delay: 7.5s;
+}
+
+/* ===== INTERACTIONS ===== */
+
+.clickable-word {
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.clickable-word:hover {
+  color: #C2A65A;
+  letter-spacing: 2px;
+}
+
+.game-options {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.game-options button {
+  background: transparent;
+  border: 1px solid #C2A65A;
+  color: #C2A65A;
+  padding: 10px 20px;
+  font-family: inherit;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.game-options button:hover {
+  background: #C2A65A;
+  color: #05060d;
+}
+
+.game-message {
+  margin-top: 40px;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+/* ===== MINIMAL GOLD BUTTON ===== */
+
+.chapter-button {
+  margin-top: 50px;
+  padding: 12px 28px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  background: transparent;
+  border: 1px solid rgba(194, 166, 90, 0.6);
+  color: rgba(194, 166, 90, 0.9);
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.chapter-button:hover {
+  border-color: #C2A65A;
+  color: #C2A65A;
+}
+
+/* ===== PHOTO SECTION ===== */
+
+.photo-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.chapter-photo {
+  width: 70%;
+  max-width: 750px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadePhoto 2s ease forwards;
+}
+
+@keyframes slowZoom {
+from {
+transform: scale(1);
+}
+to {
+transform: scale(1.08);
+}
+}
+
+
+@keyframes fadePhoto {
+  to { opacity: 1; }
+}
+
+/* ===== BLUR EFFECT ===== */
+
+.blurred {
+  filter: blur(6px) brightness(0.5);
+  transition: 1.5s ease;
+}
+
+/* ===== FINAL LETTER ===== */
+
+.final-message {
+  width: 80%;
+  max-width: 720px;
+  margin: 20px auto 80px auto;
+  text-align: center;
+  position: relative;
+}
+
+.message-content {
+  
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.45);
+  padding: 30px 35px;
+  border-radius: 12px;
+  max-height: none;
+}
+
+.message-content h2 {
+  color: #C2A65A;
+  margin-bottom: 20px;
+}
+
+.message-content p {
+  line-height: 2;
+  font-size: 16px;
+  opacity: 0.95;
+}
+
+/* Smooth fade-out when removed */
+.fade-letter {
+  animation: fadeOutLetter 2s ease forwards;
+}
+
+@keyframes fadeOutLetter {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* subtle scrollbar */
+.final-message::-webkit-scrollbar {
+  width: 4px;
+}
+
+.final-message::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+@keyframes fadeInMessage {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ===== CINEMATIC SIGNATURE ===== */
+
+.final-signature {
+position: fixed;
+
+bottom: 40px;   /* pushes it slightly lower */
+
+left: 50%;
+transform: translateX(-50%);
+
+font-size: 13px;
+letter-spacing: 5px;   /* cleaner spacing */
+
+color: #C2A65A;
+font-weight: 300;
+
+opacity: 0;
+z-index: 6;
+
+animation: revealSignature 4s ease forwards;
+
+pointer-events: none;
+}
+
+
+@keyframes revealSignature {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(8px);
+  }
+  100% {
+    opacity: 0.75;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ===== CINEMATIC FILM GRAIN ===== */
+
+body::before {
+content: "";
+position: fixed;
+inset: 0;
+
+background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+
+opacity: 0.04;
+pointer-events: none;
+
+animation: grainMove 8s steps(10) infinite;
+z-index: 100;
+}
+
+@keyframes grainMove {
+0% { transform: translate(0,0); }
+10% { transform: translate(-5%,-5%); }
+20% { transform: translate(10%,5%); }
+30% { transform: translate(-5%,10%); }
+40% { transform: translate(5%,-5%); }
+50% { transform: translate(-10%,10%); }
+60% { transform: translate(15%,0%); }
+70% { transform: translate(0%,15%); }
+80% { transform: translate(-15%,0%); }
+90% { transform: translate(10%,5%); }
+100% { transform: translate(0,0); }
+}
+
+/* ===== CINEMATIC FLOATING PARTICLES ===== */
+
+.cinematic-particles {
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 4;
+}
+
+.cinematic-particles span {
+position: absolute;
+width: 4px;
+height: 4px;
+background: #C2A65A;
+border-radius: 50%;
+opacity: 0.5;
+animation: floatParticle 10s linear infinite;
+}
+
+.cinematic-particles span:nth-child(1) {
+left: 20%;
+animation-delay: 0s;
+}
+
+.cinematic-particles span:nth-child(2) {
+left: 40%;
+animation-delay: 2s;
+}
+
+.cinematic-particles span:nth-child(3) {
+left: 60%;
+animation-delay: 4s;
+}
+
+.cinematic-particles span:nth-child(4) {
+left: 75%;
+animation-delay: 1s;
+}
+
+.cinematic-particles span:nth-child(5) {
+left: 90%;
+animation-delay: 3s;
+}
+
+@keyframes floatParticle {
+0% {
+transform: translateY(100vh);
+opacity: 0;
+}
+
+20% {
+opacity: 0.6;
+}
+
+80% {
+opacity: 0.6;
+}
+
+100% {
+transform: translateY(-20vh);
+opacity: 0;
+}
+}
+
+/* ===== CINEMATIC ENDING ===== */
+
+.cinematic-ending {
+  position: fixed;
+  inset: 0;
+  background: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 20px;
+  letter-spacing: 6px;
+  color: #C2A65A;
+
+  opacity: 0;
+  animation: endingFade 6s ease forwards;
+}
+
+@keyframes endingFade {
+
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
