@@ -26,29 +26,39 @@ body::after {
   pointer-events: none;
 }
 
-/* ===== ROOT CENTERING ===== */
+/* ===== ROOT ===== */
 
 #root {
   min-height: 100vh;
 }
 
+/* ===== MAIN CONTAINER ===== */
+
 .scene-container {
   position: relative;
   min-height: 100vh;
+  width: 100%;
+
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 80px;
+  align-items: center;
+
+  padding: 40px 20px;
+  box-sizing: border-box;
 }
 
-/* ===== OPENING SCENE ===== */
+/* ===== SCENES ===== */
 
 .opening,
 .next-scene {
-  position: absolute;
+  position: relative;
   text-align: center;
+  width: 100%;
+  max-width: 900px;
   transition: opacity 2s ease;
 }
+
+/* ===== OPENING ===== */
 
 .subtitle {
   font-size: 13px;
@@ -83,6 +93,7 @@ body::after {
 
 .next-scene .content {
   max-width: 750px;
+  margin: auto;
   padding: 0 20px;
 }
 
@@ -95,9 +106,9 @@ body::after {
 }
 
 .section-title {
-  font-size: 78px;
+  font-size: 70px;
   line-height: 1.05;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   color: #C2A65A;
   font-weight: 400;
   transition: 0.6s ease;
@@ -152,7 +163,7 @@ body::after {
   animation-delay: 7.5s;
 }
 
-/* ===== INTERACTIONS ===== */
+/* ===== CLICKABLE ===== */
 
 .clickable-word {
   cursor: pointer;
@@ -164,11 +175,14 @@ body::after {
   letter-spacing: 2px;
 }
 
+/* ===== GAME OPTIONS ===== */
+
 .game-options {
   margin-top: 40px;
   display: flex;
   gap: 20px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .game-options button {
@@ -193,7 +207,7 @@ body::after {
   opacity: 0.8;
 }
 
-/* ===== MINIMAL GOLD BUTTON ===== */
+/* ===== BUTTON ===== */
 
 .chapter-button {
   margin-top: 50px;
@@ -213,7 +227,7 @@ body::after {
   color: #C2A65A;
 }
 
-/* ===== PHOTO SECTION ===== */
+/* ===== PHOTO ===== */
 
 .photo-container {
   position: relative;
@@ -221,57 +235,58 @@ body::after {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  justify-content: center;
 }
 
+
 .chapter-photo {
-  width: 70%;
-  max-width: 750px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 100%;
+  max-width: 720px;
+
   height: auto;
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 40px;
+
   opacity: 0;
   animation: fadePhoto 2s ease forwards;
 }
 
-@keyframes slowZoom {
-from {
-transform: scale(1);
-}
-to {
-transform: scale(1.08);
-}
-}
 
+
+.chapter-photo:hover {
+  transform: scale(1.03);
+}
 
 @keyframes fadePhoto {
   to { opacity: 1; }
 }
 
-/* ===== BLUR EFFECT ===== */
+/* ===== BLUR ===== */
 
 .blurred {
   filter: blur(6px) brightness(0.5);
   transition: 1.5s ease;
 }
 
-/* ===== FINAL LETTER ===== */
+/* ===== FINAL MESSAGE ===== */
 
 .final-message {
-  width: 80%;
+  width: 85%;
   max-width: 720px;
-  margin: 20px auto 80px auto;
+  margin: auto;
   text-align: center;
-  position: relative;
 }
 
 .message-content {
-  
   backdrop-filter: blur(6px);
   background: rgba(0,0,0,0.45);
   padding: 30px 35px;
   border-radius: 12px;
-  max-height: none;
 }
 
 .message-content h2 {
@@ -285,61 +300,23 @@ transform: scale(1.08);
   opacity: 0.95;
 }
 
-/* Smooth fade-out when removed */
-.fade-letter {
-  animation: fadeOutLetter 2s ease forwards;
-}
-
-@keyframes fadeOutLetter {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
-
-/* subtle scrollbar */
-.final-message::-webkit-scrollbar {
-  width: 4px;
-}
-
-.final-message::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.3);
-  border-radius: 10px;
-}
-
-@keyframes fadeInMessage {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -55%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-/* ===== CINEMATIC SIGNATURE ===== */
+/* ===== SIGNATURE ===== */
 
 .final-signature {
-position: fixed;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
 
-bottom: 40px;   /* pushes it slightly lower */
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: #C2A65A;
 
-left: 50%;
-transform: translateX(-50%);
+  opacity: 0;
+  z-index: 6;
 
-font-size: 13px;
-letter-spacing: 5px;   /* cleaner spacing */
-
-color: #C2A65A;
-font-weight: 300;
-
-opacity: 0;
-z-index: 6;
-
-animation: revealSignature 4s ease forwards;
-
-pointer-events: none;
+  animation: revealSignature 4s ease forwards;
 }
-
 
 @keyframes revealSignature {
   0% {
@@ -352,7 +329,39 @@ pointer-events: none;
   }
 }
 
-/* ===== CINEMATIC FILM GRAIN ===== */
+/* ===== PARTICLES ===== */
+
+.cinematic-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.cinematic-particles span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #C2A65A;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: floatParticle 10s linear infinite;
+}
+
+.cinematic-particles span:nth-child(1){ left:20%; animation-delay:0s; }
+.cinematic-particles span:nth-child(2){ left:40%; animation-delay:2s; }
+.cinematic-particles span:nth-child(3){ left:60%; animation-delay:4s; }
+.cinematic-particles span:nth-child(4){ left:75%; animation-delay:1s; }
+.cinematic-particles span:nth-child(5){ left:90%; animation-delay:3s; }
+
+@keyframes floatParticle {
+0% { transform: translateY(100vh); opacity:0; }
+20% { opacity:0.6; }
+80% { opacity:0.6; }
+100% { transform: translateY(-20vh); opacity:0; }
+}
+
+/* ===== FILM GRAIN ===== */
 
 body::before {
 content: "";
@@ -382,71 +391,7 @@ z-index: 100;
 100% { transform: translate(0,0); }
 }
 
-/* ===== CINEMATIC FLOATING PARTICLES ===== */
-
-.cinematic-particles {
-position: fixed;
-inset: 0;
-pointer-events: none;
-z-index: 4;
-}
-
-.cinematic-particles span {
-position: absolute;
-width: 4px;
-height: 4px;
-background: #C2A65A;
-border-radius: 50%;
-opacity: 0.5;
-animation: floatParticle 10s linear infinite;
-}
-
-.cinematic-particles span:nth-child(1) {
-left: 20%;
-animation-delay: 0s;
-}
-
-.cinematic-particles span:nth-child(2) {
-left: 40%;
-animation-delay: 2s;
-}
-
-.cinematic-particles span:nth-child(3) {
-left: 60%;
-animation-delay: 4s;
-}
-
-.cinematic-particles span:nth-child(4) {
-left: 75%;
-animation-delay: 1s;
-}
-
-.cinematic-particles span:nth-child(5) {
-left: 90%;
-animation-delay: 3s;
-}
-
-@keyframes floatParticle {
-0% {
-transform: translateY(100vh);
-opacity: 0;
-}
-
-20% {
-opacity: 0.6;
-}
-
-80% {
-opacity: 0.6;
-}
-
-100% {
-transform: translateY(-20vh);
-opacity: 0;
-}
-}
-
-/* ===== CINEMATIC ENDING ===== */
+/* ===== ENDING ===== */
 
 .cinematic-ending {
   position: fixed;
@@ -467,15 +412,33 @@ opacity: 0;
 
 @keyframes endingFade {
 
-  0% {
-    opacity: 0;
-  }
+0% { opacity:0; }
+40% { opacity:1; }
+100% { opacity:1; }
 
-  40% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 1;
-  }
 }
+
+
+/* ===== MOBILE FIX ===== */
+
+@media (max-width: 768px) {
+
+.scene-container {
+  padding: 30px 15px;
+}
+
+.section-title {
+  font-size: 42px;
+}
+
+.chapter-photo {
+  width: 92%;
+}
+
+.final-message {
+  width: 92%;
+}
+
+}
+
+

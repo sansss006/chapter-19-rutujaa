@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 
 function App() {
@@ -71,7 +72,7 @@ setGameMessage("");
 
 };
 
-// 🎵 MUSIC FADE IN
+// MUSIC FADE IN
 useEffect(() => {
 
 if (phase === "birthdayUnlock" && audioRef.current) {
@@ -101,7 +102,7 @@ clearInterval(fadeIn);
 
 }, [phase]);
 
-// 🎬 PHOTO SLIDESHOW
+// PHOTO SLIDESHOW
 useEffect(() => {
 
 if (phase !== "photoChapter") return;
@@ -118,17 +119,14 @@ if (!endingTriggered.current) {
 
 endingTriggered.current = true;
 
-// show final message
 setTimeout(() => {
 setShowFinalMessage(true);
 }, 2500);
 
-// show signature later
 setTimeout(() => {
 
 setShowSignature(true);
 
-// fade music slowly
 if (audioRef.current) {
 
 let volume = audioRef.current.volume;
@@ -193,6 +191,7 @@ style={{ cursor: "pointer" }}
 {phase === "opening" && (
 
 <p className="continue-text">Click to continue</p>
+
 )}
 
 </div>
@@ -202,6 +201,7 @@ style={{ cursor: "pointer" }}
 {phase === "next" && (
 
 <div className="next-scene fade-in">
+
 <div className="content">
 
 <p className="section-label">
@@ -223,6 +223,7 @@ Yours are being directed.
 </p>
 
 </div>
+
 </div>
 
 )}
@@ -230,30 +231,37 @@ Yours are being directed.
 {phase === "directorMode" && (
 
 <div className="next-scene fade-in">
+
 <div className="content">
 
 <p className="section-label">Director Mode</p>
+
 <h1 className="section-title">Direct the Scene</h1>
 
 <div className="game-options">
 
 <button onClick={() => handleGameClick("close")}>
-Close-Up </button>
+Close-Up
+</button>
 
 <button onClick={() => handleGameClick("establishing")}>
-Establishing Shot </button>
+Establishing Shot
+</button>
 
 <button onClick={() => handleGameClick("final")}>
-Final Frame </button>
+Final Frame
+</button>
 
 </div>
 
 {gameMessage && (
 
 <p className="game-message">{gameMessage}</p>
+
 )}
 
 </div>
+
 </div>
 
 )}
@@ -261,15 +269,16 @@ Final Frame </button>
 {phase === "birthdayUnlock" && (
 
 <div className="next-scene fade-in">
+
 <div className="content">
 
 <p className="section-label">Chapter 19</p>
+
 <h1 className="section-title">Level Unlocked.</h1>
 
 <button
 className="chapter-button"
 onClick={() => setPhase("photoChapter")}
-
 >
 
 Begin Chapter 19
@@ -277,6 +286,7 @@ Begin Chapter 19
 </button>
 
 </div>
+
 </div>
 
 )}
@@ -284,6 +294,7 @@ Begin Chapter 19
 {phase === "photoChapter" && (
 
 <div className="next-scene fade-in">
+
 <div className="content photo-container">
 
 <img
@@ -348,18 +359,19 @@ Happy Birthday, Director. 🎬✨
 </p>
 
 </div>
+
 </div>
 
 )}
 
 {showFinalMessage && (
-  <div className="cinematic-particles">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+<div className="cinematic-particles">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
 )}
 
 {showSignature && (
@@ -371,14 +383,15 @@ Happy Birthday, Director. 🎬✨
 )}
 
 </div>
+
 </div>
 
 )}
 
 {showEnding && (
-  <div className="cinematic-ending">
-    — Picture abhi baaki hai.
-  </div>
+<div className="cinematic-ending">
+— Picture abhi baaki hai.
+</div>
 )}
 
 </div>
@@ -388,3 +401,4 @@ Happy Birthday, Director. 🎬✨
 }
 
 export default App;
+
